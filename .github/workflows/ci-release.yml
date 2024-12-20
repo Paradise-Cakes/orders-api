@@ -101,7 +101,7 @@ jobs:
       - name: Configure AWS credentials for us-east-1 - PROD
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::132899756990orders-api-terraform-deployer
+          role-to-assume: arn:aws:iam::132899756990:role/orders-api-terraform-deployer
           aws-region: us-east-1
 
       - name: Login to Amazon ECR us-east-1 - PROD
