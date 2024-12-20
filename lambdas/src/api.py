@@ -5,7 +5,7 @@ from mangum import Mangum
 
 from src.routes import hello
 
-app = FastAPI(title="Desserts API", version="1.0.0", root_path="/v1")
+app = FastAPI(title="Orders API", version="1.0.0", root_path="/v1")
 
 app.add_middleware(
     CORSMiddleware,
