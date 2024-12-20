@@ -17,7 +17,12 @@ resource "aws_lambda_function" "app" {
 
   environment {
     variables = {
-      REGION = "us-east-1"
+      DYNAMODB_REGION                      = "us-east-1"
+      DYNAMODB_ENDPOINT_URL                = "https://dynamodb.us-east-1.amazonaws.com"
+      DYNAMODB_ORDERS_TABLE_NAME           = aws_dynamodb_table.orders.name
+      DYNAMODB_ORDER_TYPE_COUNT_TABLE_NAME = aws_dynamodb_table.order_type_count.name
+      DYNAMODB_PRICES_TABLE_NAME           = data.aws_dynamodb_table.prices.name
+      REGION                               = "us-east-1",
     }
   }
 }
