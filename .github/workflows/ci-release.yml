@@ -163,6 +163,16 @@ jobs:
             --backend-config="bucket=orders-dev-api-tfstate" \
             --backend-config="key=orders-dev-api.tfstate"
 
+      - name: TEMP IMPORT DEV
+        env:
+          TF_VAR_environment: dev
+          TF_VAR_region: us-east-1
+          TF_VAR_docker_image_tag: "${{env.BRANCH_NAME}}-${{env.SHORT_SHA}}"
+          TF_VAR_short_version: "${{env.SHORT_SHA}}"
+        run: |
+          cd ${GITHUB_WORKSPACE}/terraform
+          terraform import aws_cloudwatch_log_group.app /aws/lambda/orders-api-us-east-1
+
       - name: Terraform Plan - DEV
         id: tf-plan-dev
         env:
@@ -253,6 +263,16 @@ jobs:
           terraform init \
             --backend-config="bucket=orders-api-tfstate" \
             --backend-config="key=orders-api.tfstate"
+
+      - name: TEMP IMPORT PROD
+        env:
+          TF_VAR_environment: prod
+          TF_VAR_region: us-east-1
+          TF_VAR_docker_image_tag: "${{env.BRANCH_NAME}}-${{env.SHORT_SHA}}"
+          TF_VAR_short_version: "${{env.SHORT_SHA}}"
+        run: |
+          cd ${GITHUB_WORKSPACE}/terraform
+          terraform import aws_cloudwatch_log_group.app /aws/lambda/orders-api-us-east-1
 
       - name: Terraform Plan - PROD
         id: tf-plan-prod
