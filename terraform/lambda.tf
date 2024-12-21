@@ -5,7 +5,7 @@ locals {
 resource "aws_lambda_function" "app" {
   image_uri     = local.lambda_image
   package_type  = "Image"
-  function_name = var.environment == "prod" ? "orders-api-us-east-1" : "dev-orders-api-us-east-1"
+  function_name = "orders-api-us-east-1"
   role          = aws_iam_role.orders_api_role.arn
 
   timeout     = 30
