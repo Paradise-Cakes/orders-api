@@ -8,4 +8,4 @@ RUN cd ${LAMBDA_TASK_ROOT} && \
     sed -i '/^uuid==/d' requirements.txt && \
     python -m pip install -r requirements.txt
 
-CMD ["src.api.lambda_handler"]
+CMD ["datadog_lambda.handler.handler"]
