@@ -37,6 +37,10 @@ resource "aws_api_gateway_deployment" "deployment" {
 resource "aws_api_gateway_domain_name" "domain_name" {
   certificate_arn = data.aws_acm_certificate.orders_api.arn
   domain_name     = data.aws_acm_certificate.orders_api.domain
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_api_gateway_base_path_mapping" "base_path_mapping" {
