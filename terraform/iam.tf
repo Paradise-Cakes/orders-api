@@ -81,3 +81,21 @@ resource "aws_iam_role_policy_attachment" "api_gateway_attachment" {
   policy_arn = aws_iam_policy.orders_api_policy.arn
   role       = aws_iam_role.orders_api_role.name
 }
+
+resource "aws_iam_policy" "datadog_kms_decrypt" {
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect   = "Allow",
+        Action   = "kms:Decrypt",
+        Resource = "arn:aws:kms:us-east-1:${data.aws_caller_identity.current.account_id}:key/*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "datadog_kms_decrypt_attachment" {
+  policy_arn = aws_iam_policy.datadog_kms_decrypt.arn
+  role       = aws_iam_role.orders_api_role.name
+}
