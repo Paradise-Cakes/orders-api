@@ -83,8 +83,6 @@ resource "aws_iam_role_policy_attachment" "api_gateway_attachment" {
 }
 
 resource "aws_iam_policy" "datadog_kms_decrypt" {
-  name = "DatadogKMSDecrypt"
-
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
